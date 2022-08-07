@@ -18,6 +18,10 @@ public class UserRepository {
 
     // TODO getUser, deleteUser, editUser
 
+    public User getUser(String userId) {
+        return users.stream().filter(user -> user.getUserId().equals(userId)).findFirst().orElse(null);
+    }
+
     public List<User> getUsers() {
         return users;
     }
