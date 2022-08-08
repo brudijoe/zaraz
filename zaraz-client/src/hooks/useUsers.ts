@@ -4,8 +4,14 @@ import { SETTINGS } from "../settings/settings";
 
 export const UserContext = createContext<UserStore | null>(null);
 
-export default function useUsers() {
-  const [users, setUsers] = useState<IUser[]>([]);
+export default function useUsers(): UserStore {
+  const initalState = [
+    { userId: "1", userName: "Bobby" },
+    { userId: "2", userName: "Tom" },
+    { userId: "3", userName: "Jordan" },
+  ];
+
+  const [users, setUsers] = useState<IUser[]>(initalState);
 
   useEffect(() => {
     getUsers();

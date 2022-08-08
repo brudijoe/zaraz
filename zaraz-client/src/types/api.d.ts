@@ -1,5 +1,5 @@
 interface UserStore {
-  users: IUser[] | undefined;
+  users: IUser[] | any[];
 }
 
 interface IUser {
