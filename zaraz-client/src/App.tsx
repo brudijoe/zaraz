@@ -1,26 +1,18 @@
 import React from "react";
 import "./App.css";
-import Button from "@mui/material/Button";
-import { DataGrid, GridRowsProp, GridColDef } from "@mui/x-data-grid";
-
-const rows: GridRowsProp = [
-  { id: 1, col1: "Hello", col2: "World" },
-  { id: 2, col1: "DataGridPro", col2: "is Awesome" },
-  { id: 3, col1: "MUI", col2: "is Amazing" },
-];
-
-const columns: GridColDef[] = [
-  { field: "col1", headerName: "Column 1", width: 150 },
-  { field: "col2", headerName: "Column 2", width: 150 },
-];
+import useUsers, { UserContext } from "./hooks/useUsers";
+import { UserManagement } from "./pages/UserMangement";
 
 function App() {
+  const { users } = useUsers();
+
+  const UserContextProvider = UserContext.Provider;
+
   return (
     <div className="App">
-      <Button variant="contained">Hello World</Button>
-      <div style={{ height: 300, width: "100%" }}>
-        <DataGrid rows={rows} columns={columns} />
-      </div>
+      <UserContextProvider value={{ users }}>
+        <UserManagement />
+      </UserContextProvider>
     </div>
   );
 }

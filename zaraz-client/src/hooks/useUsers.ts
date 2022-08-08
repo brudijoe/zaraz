@@ -1,6 +1,8 @@
+import {createContext, useEffect, useState} from "react";
 import axios from "axios";
-import { useEffect, useState } from "react";
 import {SETTINGS} from "../settings/settings";
+
+export const UserContext = createContext(null);
 
 export default function useUsers() {
 
