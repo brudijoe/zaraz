@@ -1,26 +1,22 @@
-import {createContext, useEffect, useState} from "react";
+import { createContext, useEffect, useState } from "react";
 import axios from "axios";
-import {SETTINGS} from "../settings/settings";
+import { SETTINGS } from "../settings/settings";
 
-export const UserContext = createContext(null);
+export const UserContext = createContext<UserStore | null>(null);
 
 export default function useUsers() {
+  const [users, setUsers] = useState<IUser[]>([]);
 
-    const [users, setUsers] = useState([]);
+  useEffect(() => {
+    getUsers();
+  }, []);
 
-    useEffect(() => {
-        getUsers();
-    }, [])
+  async function getUsers() {
+    const { data } = await axios.get<IUser[]>(`${SETTINGS.HOST}/zaraz/users`);
+    setUsers(data);
+  }
 
-    async function getUsers() {
-        const {data} = await axios.get(
-            `${SETTINGS.HOST}/zaraz/users`
-        );
-        setUsers(data);
-    }
-    
-    return {
-        users
-    }
-
+  return {
+    users,
+  };
 }
